@@ -1,0 +1,27 @@
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* Main */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+.main {
+    background-image: linear-gradient(to bottom, #2a1b52, #533b89 );
+}
+.main h4 {
+    color: #fff;
+}
+#indicator {
+    text-align: center;
+    font-size: 100px;
+    line-height: 200px;
+    color: #f11;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* Utilities */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+.relative {
+    position: relative;
+}
+.action-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

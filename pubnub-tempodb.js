@@ -36,7 +36,7 @@ exports.server = function(setup) {
         ,   data   = event.data;
 
         // Check Input
-        if (!data || !action || !series) return error({
+        if (!action) return error({
             info  : 'Invalid Request',
             event : event
         });
@@ -45,6 +45,22 @@ exports.server = function(setup) {
         request(event);
         events.fire( action, event );
     }
+
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    // Ping/Pong Receiver
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    events.bind( 'ping', function(event) {
+        console.log('publisning!!!!!!',event,{
+            channel : event.response,
+            message : 'pong'
+        });
+        pubnub.publish({
+            channel : event.response,
+            message : 'pong',
+            callback : function(data){ console.log(data) }
+        });
+    } );
+
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Data Event Receiver
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -55,6 +71,7 @@ exports.server = function(setup) {
         ,   data     = event.data;    // Payload
 
         tempodb.write_key( series, data, function(result) {
+            if (!result.body) result.body = "Success";
             if (response) pubnub.publish({
                 channel : response,
                 message : result
