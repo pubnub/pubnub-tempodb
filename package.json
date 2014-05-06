@@ -1,0 +1,38 @@
+{
+  "name": "pubnub-tempodb",
+  "preferGlobal": false,
+  "version": "1.0.2", 
+  "author": "PubNub <stephen@pubnub.com>",
+  "description": "TempoDB Connector to any programming interface.",
+  "contributors": [
+    {
+      "name": "Stephen Blum",
+      "email": "stephen@pubnub.com"
+    }
+  ],
+  "bin": {},
+  "scripts": { },
+  "main": "./pubnub-tempodb.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pubnub/pubnub-tempodb.git"
+  },
+  "keywords": [
+    "cloud",
+    "iot",
+    "internet of thigns",
+    "websockets",
+    "realtime",
+    "real-time",
+    "messaging"
+  ],
+  "dependencies": { 
+    "pubnub"  : "3.5.0",
+    "tempodb" : "0.5.0"
+  },
+  "noAnalyze": false,
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "license": "MIT",
+  "engine": { "node": ">=0.2" }
+}
