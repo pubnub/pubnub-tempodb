@@ -2,13 +2,13 @@ var PubNubClient  = require('pubnub');
 var TempoDBClient = require('tempodb').TempoDBClient;
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Server
+// Start the IoT Server Bridge for TempoDB via PubNub
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 exports.server = function(setup) {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Init Vendor Libs
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-    var tempodb = new TempoDBClient( setup.tempodb.key, setup.tempodb.secret );
+    var tempodb = new TempoDBClient(setup.tempodb.key, setup.tempodb.secret);
     var pubnub  = PubNubClient(setup.pubnub);
     var request = setup.request || function(){};
     var error   = setup.error   || function(){};
@@ -28,22 +28,41 @@ exports.server = function(setup) {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     function reciever(event) {
         var action = event.action
+        ,   series = event.series
         ,   data   = event.data;
 
         // Check Input
-        if (!data || !action) return error(['Invalid Request', event]);
+        if (!data || !action || !series) return error({
+            info  : 'Invalid Request',
+            event : event
+        });
 
         // Fire Event
         request(event);
-        events.fire( action, data );
+        events.fire( action, event );
     }
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Data Event Receiver
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-    events.bind( 'write', function(data) {
+    events.bind( 'write', function(event) {
+        var action   = event.action   // Action "write", "read", "ping"
+        ,   series   = event.series   // TempoDB Series Key
+        ,   response = event.response // Response Channel
+        ,   data     = event.data;    // Payload
+
+        tempodb.write_key( series, data, function(result) {
+            if (response) pubnub.publish({
+                channel : response,
+                message : result
+            });
+            debug(result);
+        } );
     } );
 };
 
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Events Manager
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 var events = {
     'list'   : {},
     'unbind' : function( name ) { events.list[name] = [] },
