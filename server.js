@@ -4,7 +4,10 @@ var PubNubTempoDBServer = require('./pubnub-tempodb');
 // Start PubNub TempoDB Bridge Server
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 PubNubTempoDBServer.server({
-    pubnub : {
+    request : request,
+    error   : error,
+    debug   : debug,
+    pubnub  : {
         publish_key   : 'demo',
         subscribe_key : 'demo',
         secret_key    : 'demo',
@@ -28,4 +31,25 @@ function server_ready() {
         '&pub=demo'+
         '&sub=demo'
     );
+}
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// On Request Events
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function request(data) {
+    console.log( 'REQUEST', data );
+}
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// On Errors Events
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function error(data) {
+    console.log( 'ERROR', data );
+}
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// On Debug Events
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+function debug(data) {
+    console.log( 'DEBUG', data );
 }
