@@ -20,7 +20,10 @@
 
     <div class="row">
         <div class="col-xs-5">
-            <h4>Command</h4>
+            <h4>IoT TempoDB Commands</h4>
+            <p>Request Channel: <code>tempodb</code></p>
+
+            <!-- Write Data Button -->
             <div class="relative">
                 <div class="action-button">
                     <button type="button" class="btn btn-primary">
@@ -33,15 +36,35 @@
   "data"     : [ {"v":1}, {"v":2} ],
   "series"   : "test-series",
   "response" : "50N3l1dzRocjY3dDZ5aG" }</pre>
+
+
+            <!-- Read Data Button -->
+            <div class="relative">
+                <div class="action-button">
+                    <button type="button" class="btn btn-primary">
+                        Read Data
+                    </button>
+                </div>
+            </div>
+            <pre id="read-command">
+{ "action"   : "read",
+  "series"   : "test-series",
+  "response" : "50N3l1dzRocjY3dDZ5aG" }</pre>
+
+
         </div>
         <div class="col-xs-2">
             <div id="indicator">
                 <span class="glyphicon glyphicon-off"></span>
             </div>
+            <div class="indicator-title">
+                Connection Status
+            </div>
         </div>
         <div class="col-xs-5">
-            <h4>Results</h4>
-            <pre id="result">...</pre>
+            <h4>Responses</h4>
+            <p>Response Channel: <code>50N3l1dzRocjY3dDZ5aG</code></p>
+            <pre id="result"></pre>
         </div>
     </div>
 

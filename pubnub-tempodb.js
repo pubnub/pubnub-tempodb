@@ -50,19 +50,14 @@ exports.server = function(setup) {
     // Ping/Pong Receiver
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     events.bind( 'ping', function(event) {
-        console.log('publisning!!!!!!',event,{
-            channel : event.response,
-            message : 'pong'
-        });
         pubnub.publish({
             channel : event.response,
-            message : 'pong',
-            callback : function(data){ console.log(data) }
+            message : { action : 'pong', data : 'pong' }
         });
     } );
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-    // Data Event Receiver
+    // Write Event
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     events.bind( 'write', function(event) {
         var action   = event.action   // Action "write", "read", "ping"
@@ -74,7 +69,25 @@ exports.server = function(setup) {
             if (!result.body) result.body = "Success";
             if (response) pubnub.publish({
                 channel : response,
-                message : result
+                message : { action : 'pong', data : result }
+            });
+            debug(result);
+        } );
+    } );
+
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    // Read Event
+    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    events.bind( 'read', function(event) {
+        var action   = event.action   // Action "write", "read", "ping"
+        ,   series   = event.series   // TempoDB Series Key
+        ,   response = event.response // Response Channel
+        ,   data     = event.data;    // Payload
+
+        tempodb.read( event.start, event.end, event, function(result) {
+            if (response) pubnub.publish({
+                channel : response,
+                message : { action : 'pong', data : result }
             });
             debug(result);
         } );

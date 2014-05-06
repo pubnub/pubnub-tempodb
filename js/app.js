@@ -30,9 +30,21 @@ function receiver( data, envelope, channel ) {
 // Check Connectivity Ping/Pong
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 function pong() {
+    if (pong.ready) return;
+    pong.ready = true;
+    log("Connection Ready.");
+    clearInterval(ping.iv);
     var indicator = pubnub.$("indicator");
-    indicator.innerHTML = '<span class="glyphicon glyphicon-ok"></span>';
-    pubnub.css( indicator, { color : "#2e1" } );
+    indicator.innerHTML = '<span class="glyphicon glyphicon-check"></span>';
+    animate( indicator, [
+        { 'd' : 0.1, 'color'   : 'rgba(10,178,21,1.0)' },
+        { 'd' : 0.2, 'color'   : '#fff' },
+        { 'd' : 0.1, 'color'   : 'rgba(10,178,21,1.0)' },
+        { 'd' : 0.3, 'color'   : '#fff' },
+        { 'd' : 0.1, 'color'   : 'rgba(10,178,21,1.0)' },
+        { 'd' : 0.3, 'color'   : '#fff' },
+        { 'd' : 0.2, 'color'   : 'rgba(10,178,21,1.0)' }
+    ] );
 }
 function ping() {
     pubnub.publish({
@@ -40,6 +52,11 @@ function ping() {
         message : { action : 'ping', response : pubnub.response_channel }
     });
 }
+ping.iv = setInterval( ping, 1500 );
 
+log.out = pubnub.$('result');
+function log(data) {
+    log.out.innerHTML = JSON.stringify(data) + "\n" + log.out.innerHTML;
+}
 
 })();

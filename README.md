@@ -55,7 +55,7 @@ PubNubTempoDBServer.server({
 });
 ```
 
-## PubNub IoT TempoDB Example Communication Layer
+## PubNub IoT TempoDB Communication Layer
 
 Once you have the server running, you can begin communication over the bridge
 directly with TempoDB service.

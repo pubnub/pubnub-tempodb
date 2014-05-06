@@ -3,15 +3,27 @@
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 .main {
     background-image: linear-gradient(to bottom, #2a1b52, #533b89 );
+    color: #fff;
 }
 .main h4 {
     color: #fff;
 }
 #indicator {
+    -webkit-transition: all 0.7s;
     text-align: center;
+    margin-top: 40px;
     font-size: 100px;
-    line-height: 200px;
+    line-height: 100px;
     color: #f11;
+}
+.indicator-title {
+    font-family: "Helvetica Neue";
+    text-align: center;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: #fff;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
@@ -24,4 +36,10 @@
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+button,
+textarea,
+input {
+    outline: none !important;
 }
