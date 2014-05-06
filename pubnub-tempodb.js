@@ -8,7 +8,11 @@ exports.server = function(setup) {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Init Vendor Libs
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-    var tempodb = new TempoDBClient(setup.tempodb.key, setup.tempodb.secret);
+    var tempodb = new TempoDBClient(
+        setup.tempodb.key,
+        setup.tempodb.secret,
+        setup.tempodb
+    );
     var pubnub  = PubNubClient(setup.pubnub);
     var request = setup.request || function(){};
     var error   = setup.error   || function(){};
