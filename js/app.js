@@ -26,9 +26,45 @@ function receiver( data, envelope, channel ) {
 }
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-// Check Connectivity Ping/Pong
+// Read
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+pubnub.bind( 'mousedown,touchstart', pubnub.$('read-command'), function() {
+    pubnub.publish({
+        channel : 'tempodb',
+        message : {
+            "action"   : "read",
+            "series"   : "test-series",
+            "limit"    : 1,
+            "response" : "50N3l1dzRocjY3dDZ5aG"
+        }
+    });
+} );
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Write
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+pubnub.bind( 'mousedown,touchstart', pubnub.$('write-command'), function() {
+    pubnub.publish({
+        channel : 'tempodb',
+        message : {
+            "action"   : "write",
+            "data"     : [ {"v":1}, {"v":2} ],
+            "series"   : "test-series",
+            "response" : "50N3l1dzRocjY3dDZ5aG"
+        }
+    });
+} );
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Events
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 pubnub.events.bind( 'pong', pong );
+pubnub.events.bind( 'write', log );
+pubnub.events.bind( 'read', log );
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// Check Connectivity Ping/Pong
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 function pong() {
     if (pong.ready) return;
     pong.ready = true;

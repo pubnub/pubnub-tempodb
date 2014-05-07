@@ -69,7 +69,7 @@ exports.server = function(setup) {
             if (!result.body) result.body = "Success";
             if (response) pubnub.publish({
                 channel : response,
-                message : { action : 'pong', data : result }
+                message : { action : 'write', data : result }
             });
             debug(result);
         } );
@@ -84,12 +84,17 @@ exports.server = function(setup) {
         ,   response = event.response // Response Channel
         ,   data     = event.data;    // Payload
 
-        tempodb.read( event.start, event.end, event, function(result) {
+        tempodb.read(
+            event.start || new Date('2010-01-01'),
+            event.end   || new Date,
+            event,
+        function(result) {
             if (response) pubnub.publish({
-                channel : response,
-                message : { action : 'pong', data : result }
+                channel  : response,
+                message  : { action : 'read', data : result },
+                callback : debug
             });
-            debug(result);
+            debug(JSON.stringify(result));
         } );
     } );
 };

@@ -46,12 +46,13 @@
             <h5>Write Command</h5>
             <div class="relative">
                 <div class="action-button">
-                    <button type="button" class="btn btn-purple">
+                    <button id="write-command" type="button"
+                    class="btn btn-purple">
                         Write
                     </button>
                 </div>
             </div>
-            <pre id="write-command">
+            <pre>
 pubnub.publish({
     channel : 'tempodb',
     message : {
@@ -67,12 +68,13 @@ pubnub.publish({
             <h5>Read Command</h5>
             <div class="relative">
                 <div class="action-button">
-                    <button type="button" class="btn btn-purple">
+                    <button id="read-command" type="button"
+                    class="btn btn-purple">
                         Read
                     </button>
                 </div>
             </div>
-            <pre id="read-command">
+            <pre>
 pubnub.publish({
     channel : 'tempodb',
     message : {
