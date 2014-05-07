@@ -22,29 +22,52 @@ pubnub.subscribe({
 });
 
 function receiver( data, envelope, channel ) {
-    console.log('alskdjfl');
-    if (data == 'pong') pong();
+    pubnub.events.fire( data.action, data );
 }
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Check Connectivity Ping/Pong
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+pubnub.events.bind( 'pong', pong );
 function pong() {
     if (pong.ready) return;
     pong.ready = true;
-    log("Connection Ready.");
+
     clearInterval(ping.iv);
-    var indicator = pubnub.$("indicator");
+    sounds.play('media/notify');
+
+    var indicator = pubnub.$("indicator")
+    ,   title     = pubnub.$("indicator-title");
+
+    log('Connection Ready');
+    title.innerHTML     = 'Connection Ready';
     indicator.innerHTML = '<span class="glyphicon glyphicon-check"></span>';
-    animate( indicator, [
-        { 'd' : 0.1, 'color'   : 'rgba(10,178,21,1.0)' },
-        { 'd' : 0.2, 'color'   : '#fff' },
-        { 'd' : 0.1, 'color'   : 'rgba(10,178,21,1.0)' },
-        { 'd' : 0.3, 'color'   : '#fff' },
-        { 'd' : 0.1, 'color'   : 'rgba(10,178,21,1.0)' },
-        { 'd' : 0.3, 'color'   : '#fff' },
-        { 'd' : 0.2, 'color'   : 'rgba(10,178,21,1.0)' }
+
+    animate( title, [
+        { 'd' : 1.6, 'ty' : -12 }
     ] );
+
+    animate( indicator, [
+        { d : 0.1, color : '#00d779' },
+        { d : 0.2, color : '#fff' },
+        { d : 0.1, color : '#00d779' },
+        { d : 0.2, color : '#fff' },
+        { d : 0.1, color : '#00d779' },
+        { d : 0.2, color : '#fff' },
+        { d : 0.2, color : '#00d779', ty : -10 }
+    ] );
+
+    setInterval( function() {
+        animate( indicator, [
+            { d : 0.9, color : '#00d779', ty : -5 }
+        ] );
+    }, 1500 );
+
+    setInterval( function() {
+        animate( indicator, [
+            { d : 0.9, color : '#00d779', ty : -10 }
+        ] );
+    }, 2000 );
 }
 function ping() {
     pubnub.publish({

@@ -16,14 +16,48 @@
     line-height: 100px;
     color: #f11;
 }
-.indicator-title {
+#indicator-title {
     font-family: "Helvetica Neue";
     text-align: center;
     font-size: 14px;
     font-weight: 100;
-    line-height: 30px;
+    line-height: 36px;
     letter-spacing: 1px;
     color: #fff;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* Header */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+.header-margin {
+    margin: 90px 0 280px 0;
+}
+.header-lead {
+    margin: 0 0 40px 0;
+}
+.pubnub-logo {
+    height: 36px;
+    margin: 0 0 13px 10px;
+    padding: 0;
+}
+.tempodb-logo {
+    margin: 0 10px 0 0;
+    padding: 0;
+    height: 40px;
+}
+
+.action-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+pre {
+    border-radius: 18px;
+    margin: 0 0 20px 0;
+    background: #3a2765;
+    color: #eee;
+    border: 0;
+    padding: 40px;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
@@ -32,10 +66,9 @@
 .relative {
     position: relative;
 }
-.action-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+
+.btn-purple {
+    background-color: #7966ac;
 }
 
 button,

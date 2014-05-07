@@ -9,7 +9,7 @@
     <meta name="description" content="PubNub Doorbell">
     <meta name="author" content="PubNub">
 
-    <title>PubNub IoT TempoDB Bridge</title>
+    <title>PubNub IoT Internet of Things TempoDB Bridge</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -18,38 +18,68 @@
 
 <div class="main"><div class="container">
 
+    <div class="row"><div class="header-margin">
+        <div class="col-xs-12">
+            <img class="tempodb-logo" src="media/tempodb.png">
+            <span class="glyphicon glyphicon-plus"></span>
+            <img class="pubnub-logo" src="media/pubnub.png">
+        </div>
+    </div></div>
+
+    <p class="header-lead lead">
+        PubNub powers the <strong>Internet of Things</strong>
+        with our globally distributed
+        realtime network, and allows you to connect
+        devices securely and reliably.
+        Users and businesses can communicate with their other fleet,
+        sensors and devices in realtime, over 4G,
+        WAN and private, secure networks.
+    </p>
+
     <div class="row">
         <div class="col-xs-5">
-            <h4>IoT TempoDB Commands</h4>
+            <h4>TempoDB Commands</h4>
             <p>Request Channel: <code>tempodb</code></p>
 
             <!-- Write Data Button -->
+            <h5>Write Command</h5>
             <div class="relative">
                 <div class="action-button">
-                    <button type="button" class="btn btn-primary">
-                        Write Data
+                    <button type="button" class="btn btn-purple">
+                        Write
                     </button>
                 </div>
             </div>
             <pre id="write-command">
-{ "action"   : "write",
-  "data"     : [ {"v":1}, {"v":2} ],
-  "series"   : "test-series",
-  "response" : "50N3l1dzRocjY3dDZ5aG" }</pre>
+pubnub.publish({
+    channel : 'tempodb',
+    message : {
+        <strong>"action"   : "write"</strong>,
+        "data"     : [ {"v":1}, {"v":2} ],
+        "series"   : "test-series",
+        "response" : "50N3l1dzRocjY3dDZ5aG"
+    }
+});</pre>
 
 
             <!-- Read Data Button -->
+            <h5>Read Command</h5>
             <div class="relative">
                 <div class="action-button">
-                    <button type="button" class="btn btn-primary">
-                        Read Data
+                    <button type="button" class="btn btn-purple">
+                        Read
                     </button>
                 </div>
             </div>
             <pre id="read-command">
-{ "action"   : "read",
-  "series"   : "test-series",
-  "response" : "50N3l1dzRocjY3dDZ5aG" }</pre>
+pubnub.publish({
+    channel : 'tempodb',
+    message : {
+        <strong>"action"   : "read"</strong>,
+        "series"   : "test-series",
+        "response" : "50N3l1dzRocjY3dDZ5aG"
+    }
+});</pre>
 
 
         </div>
@@ -57,7 +87,7 @@
             <div id="indicator">
                 <span class="glyphicon glyphicon-off"></span>
             </div>
-            <div class="indicator-title">
+            <div id="indicator-title">
                 Connection Status
             </div>
         </div>
