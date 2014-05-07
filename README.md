@@ -3,9 +3,13 @@
 Secure your IoT data and enable global WAN access with PubNub and
 the TempoDB Bridge for all Internet of Things devices.
 This bridge allows you to interface with TempoDB using any PubNub
-Client SDK including, JavaScript, C, mBed (ARM), Electric Emp,
+Client SDK.
+
+![Internet of Things with PubNub and TempoDB](http://pubnub.s3.amazonaws.com/2013/Internet-of-Things-PubNub-TempoDB-Bridge.png)
+
+> Supported Client SDKs such as JavaScript, C, mBed (ARM), Electric Emp,
 Arduino, Raspberry Pi, PIC32, Ruby, iOS Objective-C, Android Embedded,
-Java, PHP, .NET C# and more!
+Java, PHP, .NET C#, Node.js and more!
 You can connect all your IoT devices using this bridge adapter.
 
 There are no firewall rules to configure and the bridge adapter can
