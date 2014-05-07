@@ -8,10 +8,14 @@
 .main h4 {
     color: #fff;
 }
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* Indicator */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 #indicator {
     -webkit-transition: all 0.7s;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 100px;
     font-size: 100px;
     line-height: 100px;
     color: #f11;
@@ -33,7 +37,13 @@
     margin: 90px 0 280px 0;
 }
 .header-lead {
+    text-align: center;
+    font-size: 38px;
     margin: 0 0 40px 0;
+}
+.header-follow {
+    text-align: center;
+    margin: 20px 0 60px 0;
 }
 .pubnub-logo {
     height: 36px;
@@ -44,6 +54,14 @@
     margin: 0 10px 0 0;
     padding: 0;
     height: 40px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* Interaction */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+
+#result {
+    height: 500px;
 }
 
 .action-button {
