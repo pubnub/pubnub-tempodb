@@ -59,7 +59,7 @@ function pong() {
 
     setInterval( function() {
         animate( indicator, [
-            { d : 0.9, color : '#00d779', ty : -5 }
+            { d : 0.8, color : '#00d779', ty : -2 }
         ] );
     }, 1500 );
 
