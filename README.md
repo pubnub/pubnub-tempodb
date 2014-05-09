@@ -47,7 +47,7 @@ PubNubTempoDBServer.server({
         ssl           : true,
         publish_key   : 'pub-c-74c6367e-98c4-43a5-8ff9-64946f32dbc7',
         subscribe_key : 'sub-c-a7f2d50e-d544-11e3-b488-02ee2ddab7fe',
-        secret_key    : 'sec=sec-c-NTkwNTIyMTctMzA5Mi00ZDg2LTg4MzgtOWIxMDJiNDM2MTFj',
+        secret_key    : 'sec-c-NTkwNTIyMTctMzA5Mi00ZDg2LTg4MzgtOWIxMDJiNDM2MTFj',
         channel       : 'temodb',
         connect       : server_ready
     },
